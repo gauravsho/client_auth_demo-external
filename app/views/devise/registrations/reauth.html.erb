@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4><%= t('.reauth', :default => "Please confirm password") %></h4>
+  </div>
+  <div class="panel-body">
+    <%= form_for(current_user, :as => resource_name, :url => registration_reauth_path, html: { role: "form", method: "POST" }) do |f| %>
+
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+      </div>
+      <%= f.submit  t('.authenticate', :default => "Authenticate"), class: "btn btn-primary" %>
+
+    <% end %>
+  </div>
+</div>

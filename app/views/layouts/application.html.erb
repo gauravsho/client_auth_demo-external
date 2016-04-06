@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ShoCard Client Demo Site</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <div class="container">
+    <div class="row header">
+      <div class="col-md-8 col-md-offset-2">
+        <% if notice %>
+          <p class="alert alert-success"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert alert-danger"><%= alert %></p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row header">
+      <div class="col-md-8 col-md-offset-2">
+        <h2><%= link_to "Demo Site", root_path%></h2>
+        <h4>Welcome to a client demo site</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <%= yield %>
+      </div>
+    </div>
+
+    <div class="row footer">
+      <div class="col-md-8 col-md-offset-2">
+        <h5 class="pull-right">Powered by ShoCard</h5>
+      </div>
+      <div class="col-md-8 col-md-offset-2">
+        <div class="pull-right">ShoCardID: <%= Rails.configuration.shocardid_be %></div>
+      </div>
+      <div class="col-md-8 col-md-offset-2">
+        <div class="pull-right">CertifierID: <%= Rails.configuration.shocardid_er %></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

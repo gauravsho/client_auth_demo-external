@@ -1,0 +1,62 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4><%= t('.sign_in', :default => "Sign in") %></h4>
+  </div>
+  <div class="panel-body">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: "form" }) do |f| %>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <div class="row">
+          <div class="col-sm-9">
+              <%= f.email_field :email, autofocus: true, class: "form-control" %>
+          </div>
+          <div class="col-sm-3">
+            <button class="btn btn-default btn-primary" type="button" id="phoneButton" onclick="buttonClick('<%=@session_id%>')";>
+              <span class="glyphicon glyphicon-phone" aria-hidden="true"> ShoCard</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+      </div>
+      <% if devise_mapping.rememberable? %>
+        <div class="checkbox">
+          <label>
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </label>
+        </div>
+        <% end %>
+      <%= f.submit  t('.sign_in', :default => "Sign in"), class: "btn btn-primary" %>
+
+      <div style="text-align: center;">
+        <script>
+          $(document).ready(function() {pollSession("<%=@session_id%>", "logins");});
+        </script>
+        <br/>
+        Use your ShoCard QR Scanner
+        <div id="qrcode">
+          <img style="width: 250px;" src="<%=Rails.configuration.qrurl%>/<%=@qr_id%>/qr">
+        </div>
+        <%= image_tag "shocard.png", style: "margin-top: -275px; background: white; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; border-radius: 15px;" %>
+      </div>
+
+  <% end %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4><%= t('.sign_up', :default => "Sign up") %></h4>
+  </div>
+  <div class="panel-body">
+    <p>Follow this link to
+      <%= link_to "sign up for a new account", new_user_registration_path%>
+    </p>
+  </div>
+</div>

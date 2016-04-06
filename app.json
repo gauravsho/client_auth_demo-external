@@ -1,0 +1,16 @@
+{
+  "name": "ShoCard Client Demo Site",
+  "description": "An example Rails app to be used with ShoCard Identity Platform",
+  "repository": "https://github.com/ShoCardInc/client_auth_demo",
+  "keywords": ["shocard", "identity", "ruby", "rails", "demo"],
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
+  },
+  "env": {
+    "TARGET_ENV": {
+      "description": "The ShoCard environment: only 'staging' is supported",
+      "value": "staging"
+    }
+  },
+  "addons": ["heroku-postgresql", "papertrail", "shocard"]
+}

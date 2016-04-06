@@ -1,0 +1,48 @@
+<%= bootstrap_devise_error_messages! %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4><%= t('.title', :resource => resource_class.model_name.human , :default => "Edit #{resource_name.to_s.humanize}") %></h4>
+  </div>
+  <div class="panel-body">
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it', :default => "leave blank if you don't want to change it") %>)</i><br />
+        <%= f.password_field :password, :autocomplete => "off", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :shocardid %> <br />
+        <%= f.text_field :shocardid, :autocomplete => "off", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+        <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+      </div>
+      <%= f.submit t('.update', :default => "Update"), class: "btn btn-primary" %>
+    <% end %>
+
+
+    <% if current_user.shocardid.blank? %>
+      <div style="text-align: center;">
+        <script>
+          $(document).ready(function() {pollSession("<%=@session_id%>", "registrations");});
+        </script>
+        <br/>
+        Use your ShoCard QR Scanner
+        <div id="qrcode">
+          <img style="width: 250px;" src="<%=Rails.configuration.qrurl%>/<%=@qr_id%>/qr">
+        </div>
+        <%= image_tag "shocard.png", style: "margin-top: -275px; background: white; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; border-radius: 15px;" %>
+      </div>
+    <% end %>
+
+  </div>
+</div>
+
