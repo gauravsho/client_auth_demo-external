@@ -10,16 +10,14 @@ class RegistrationsController < Devise::RegistrationsController
     @ss_id = rand(36**10).to_s(36)
     Rails.cache.write("session.state.#{@session_id}", "initial")
 
-    request_data = {action: "certify",
+    request_data = {action: "register",
                     ss_id: @ss_id,
-                    data: {email: current_user.email,
-                           audit_number: "1234",
-                           name: "ShoCard Client Demo Site",
-                           shocardid_er: Rails.configuration.shocardid_er,
-                           shocardid_be: Rails.configuration.shocardid_be}}
-
-    response = HTTPClient.new.post("#{Rails.configuration.adaptorurl}/#{Rails.configuration.shocardid_be}/qrcode",
-                                   request_data.to_json,
+                    name: "ShoCard Client Demo Site",
+                    shocardid_er: Rails.configuration.shocard_id
+                  }
+    request = {data: request_data}
+    response = HTTPClient.new.post("#{Rails.configuration.adaptorurl}/#{Rails.configuration.shocard_id}/qrcode",
+                                   request.to_json,
                                    {"Content-Type" => "application/json"})
 
     response_data = JSON.parse(response.content)

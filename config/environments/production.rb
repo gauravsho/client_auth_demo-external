@@ -77,8 +77,8 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.shocardid_er = ENV["SHOCARD_CERTIFIER_ID"]
-  config.shocardid_be = ENV["SHOCARD_ID"]
+  config.shocard_certifier_id = ENV["SHOCARD_CERTIFIER_ID"]
+  config.shocard_id = ENV["SHOCARD_ID"]
   config.adaptorurl = ENV["SHOCARD_ADAPTOR_URL"]
   config.qrurl = ENV["SHOCARD_QR_URL"]
 end
