@@ -1,4 +1,5 @@
 require 'net/http'
+require 'utils'
 
 class RegistrationsController < Devise::RegistrationsController
 
@@ -9,21 +10,19 @@ class RegistrationsController < Devise::RegistrationsController
     @session_id = rand(36**10).to_s(36)
     @ss_id = rand(36**10).to_s(36)
     Rails.cache.write("session.state.#{@session_id}", "initial")
+    Rails.cache.write("session.action.#{@session_id}", "register")
 
-    request_data = {action: "certify",
+    request_data = {message: "Please provide your ShoCard ID, First Name and Last Name to register with the site",
                     ss_id: @ss_id,
-                    data: {email: current_user.email,
-                           audit_number: "1234",
-                           name: "ShoCard Client Demo Site",
-                           shocardid_er: Rails.configuration.shocardid_er,
-                           shocardid_be: Rails.configuration.shocardid_be}}
+                    name: "ShoCard Client Demo Site",
+                    requested_keys: [ "First Name", "Last Name" ],
+                    shocardid: Rails.configuration.shocard_id,
+                    action: "request_share"
+                  }
 
-    response = HTTPClient.new.post("#{Rails.configuration.adaptorurl}/#{Rails.configuration.shocardid_be}/qrcode",
-                                   request_data.to_json,
-                                   {"Content-Type" => "application/json"})
-
-    response_data = JSON.parse(response.content)
-    @qr_id = response_data["id"]
+    request = { shocard: request_data }
+    @qr_id = Utils::storeDataInShoStore(request)
+    p "ShoStore URL: #{@qr_id}"
     Rails.cache.write("ss.session.#{@ss_id}", @session_id)
     Rails.cache.write("ss.user.#{@ss_id}", current_user.id)
   end

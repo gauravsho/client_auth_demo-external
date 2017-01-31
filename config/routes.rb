@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   end
 
   get 'sessions/:id'  => 'sessions#show'
-  put 'sessions/:ssid/certify' => 'sessions#update_registrations'
+  put 'sessions/:ssid/register' => 'sessions#update_registrations'
   put 'sessions/:ssid/login' => 'sessions#update_logins'
+  put 'sessions/:ssid/share_received' => 'sessions#share_received'
+  put 'sessions/:ssid/certification_received' => 'sessions#certification_received'
+  put 'sessions/:ssid/share_request_received' => 'sessions#share_request_received'
+  post 'sessions/verify' => 'sessions#verify'
 
 end
