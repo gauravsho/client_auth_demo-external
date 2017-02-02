@@ -17,7 +17,7 @@ class LoginsController < Devise::SessionsController
       action: "request_share"
     }
 
-      request = {data: request_data}
+      request = { shocard: request_data }
       puts "qrcode #{request}"
     begin
       @qr_id = Utils::storeDataInShoStore(request)

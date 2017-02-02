@@ -12,10 +12,10 @@ class RegistrationsController < Devise::RegistrationsController
     Rails.cache.write("session.state.#{@session_id}", "initial")
     Rails.cache.write("session.action.#{@session_id}", "register")
 
-    request_data = {message: "Please provide your ShoCard ID, First Name and Last Name to register with the site",
+    request_data = {message: "Do you agree to provide your ShoCard ID to register with the site",
                     ss_id: @ss_id,
                     name: "ShoCard Client Demo Site",
-                    requested_keys: [ "First Name", "Last Name" ],
+                    requested_keys: [ ],
                     shocardid: Rails.configuration.shocard_id,
                     action: "request_share"
                   }
