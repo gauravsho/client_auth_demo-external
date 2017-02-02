@@ -41,7 +41,6 @@ Rails.application.configure do
 
   config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
 
-  config.shocard_certifier_id = ENV["SHOCARD_CERTIFIER_ID"]
   config.shocard_id = ENV["SHOCARD_ID"]
   config.adaptorurl = ENV["SHOCARD_ADAPTOR_URL"]
   config.qrurl = ENV["SHOCARD_QR_URL"] || 'https://sto-dev.shocard.io/v1/sessions'
